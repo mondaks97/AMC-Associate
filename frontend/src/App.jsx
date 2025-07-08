@@ -5,8 +5,15 @@ import PartnersPage from './Pages/PartnersPage'
 import BlogPage from './Pages/BlogPage'
 import ApplyPage from './Pages/ApplyPage'
 import HomePage from './Pages/HomePage'
+import { useEffect } from 'react'
 
 function App() {
+
+useEffect(() => {
+  window.history.scrollRestoration = "manual";
+  window.scrollTo(0, 0);
+}, []);
+
   return (
     <div>
       <Routes>

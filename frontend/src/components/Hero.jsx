@@ -10,9 +10,9 @@ const Hero = () => {
               initial={{ x: -100, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay:0.5, duration: 1 }}
-              className="text-6xl lg:text-8xl font-bold text-gray-900 leading-tight mb-4"
+              className="text-5xl lg:text-7xl font-bold text-gray-900 leading-tight mb-4"
             >
-              Supporting
+              We take your business
             </motion.h1>
 
             <motion.div
@@ -21,7 +21,7 @@ const Hero = () => {
               transition={{ delay: 0.5, duration: 1 }}
               className="flex items-start gap-7"
             >
-              <p className="text-gray-600 text-md leading-relaxed max-w-sm mt-4">
+              <p className="text-gray-600 text-sm font-medium leading-relaxed max-w-sm mt-4">
                 Behind these few words is a way of delivering professional service
                 that amounts to a way of life. Our personal commitment to our clients
                 makes a direct contribution to our professional excellence. It is the
@@ -30,11 +30,11 @@ const Hero = () => {
               </p>
 
               <div className="flex items-baseline">
-                <span className="text-6xl lg:text-8xl font-bold text-gray-900 mr-4">
+                {/* <span className="text-6xl lg:text-8xl font-bold text-gray-900 mr-4">
                   Your
-                </span>
-                <span className="text-6xl lg:text-8xl font-bold text-blue-600">
-                  Success
+                </span> */}
+                <span className="text-5xl lg:text-7xl font-bold text-blue-600">
+                  Personally
                 </span>
               </div>
             </motion.div>

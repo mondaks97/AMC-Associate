@@ -1,5 +1,7 @@
 import AboutUs from "../components/AboutUs";
 import Banner from "../components/Banner";
+import ClientLogos from "../components/ClientLogos";
+import ContactUs from "../components/ContactUs";
 import Hero from "../components/Hero";
 import Navbar from "../components/Navbar";
 import Philosophy from "../components/Philosophy";
@@ -14,6 +16,8 @@ const HomePage = () => {
       <AboutUs/>
       <Banner/>
       <Services/>
+      <ClientLogos/>
+      <ContactUs/>
     </>
   );
 };

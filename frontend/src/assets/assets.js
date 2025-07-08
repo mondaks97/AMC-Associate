@@ -3,5 +3,5 @@ import pano from './pano.gif'
 
 export const assets = {
   alden,
-  pano
+  pano,
 }
