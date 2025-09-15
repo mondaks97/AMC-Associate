@@ -7,7 +7,7 @@ const ContactUs = () => {
         <div className="flex flex-col lg:flex-row lg:items-start gap-8 lg:gap-30">
           {/* Left side - Title and description */}
           <div className="flex-shrink-0 lg:max-w-md">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-blue-500 mb-4">Get In Touch</h1>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#000099] mb-4">Get In Touch</h1>
             <p className="text-gray-600 text-base md:text-lg max-w-md">
               We'd love to hear from you! Whether you have questions, need support, or want to learn more about our services, our team is here to help.
             </p>

@@ -1,5 +1,3 @@
-
-
 import React, { useRef, useEffect } from "react";
 
 const Banner = () => {
@@ -37,7 +35,7 @@ const Banner = () => {
   return (
     <div
       ref={bannerRef}
-      className="relative min-h-[80vh] flex items-center justify-center overflow-hidden bg-gray-100"
+      className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-gray-100"
     >
       {/* Background Video */}
       <video
@@ -46,7 +44,7 @@ const Banner = () => {
         playsInline
         loop
       >
-        <source src="/videos/ed.mp4" type="video/mp4" />
+        <source src="" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 

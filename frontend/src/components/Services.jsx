@@ -2,8 +2,12 @@ import React from "react";
 import { motion } from "framer-motion";
 import { TrendingUp, BarChart3, Package } from "lucide-react";
 import { assets } from "../assets/assets";
+import { useNavigate } from "react-router-dom";
 
 const Services = () => {
+
+  const Navigate = useNavigate();
+
   return (
     <div className="min-h-screen bg-gray-50 py-16 px-4">
       <div className="max-w-6xl mx-auto">
@@ -14,12 +18,12 @@ const Services = () => {
             <br />
             business performance.
           </h1>
-          <button className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 rounded-full font-semibold transition-colors duration-200">View all services</button>
+          <button className="bg-[#800000] hover:bg-[#000099] cursor-pointer text-white px-8 py-3 rounded-full font-semibold transition-colors duration-200"  onClick={() => { window.scrollTo(0, 0); Navigate('/services')}}>View all Services </button>
         </div>
 
         {/* Main Content Section */}
         <div className="grid lg:grid-cols-3 gap-8 items-center">
-          {/* Left Image Section */}
+          {/* Left Image Section *`}
           <motion.div 
             className="lg:col-span-1"
             initial={{ opacity: 0, y: 50 }} 
@@ -31,7 +35,7 @@ const Services = () => {
               <div className="aspect-square p-8 flex items-center justify-center">
                 <div className="text-center">
                   <div className="mx-auto mb-4 flex items-center justify-center overflow-hidden">
-                    <img src={assets.pano} alt="Animated Preview" className="w-full h-full object-cover" />
+                    <img src={assets} alt="Animated Preview" className="w-full h-full object-cover" />
                   </div>
                 </div>
               </div>
@@ -66,8 +70,8 @@ const Services = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto divide-y md:divide-y-0 md:divide-x divide-gray-200">
                 {/* Market Entry Analysis - Bottom Left */}
                 <div className="text-center pr-0 md:pr-8 transition-transform duration-300 hover:-translate-y-2">
-                  <div className="w-12 h-12 bg-pink-100 rounded-xl flex items-center justify-center mx-auto mb-4">
-                    <BarChart3 className="w-6 h-6 text-pink-500" />
+                  <div className="w-12 h-12 bg-[#80000090] rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <BarChart3 className="w-6 h-6 text-[#800000]" />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-3">
                     Quality

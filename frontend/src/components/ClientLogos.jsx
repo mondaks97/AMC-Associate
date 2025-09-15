@@ -2,14 +2,12 @@ import { useState, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 
 const logos = [
-  "/logos/logo1.png",
-  "/logos/logo2.png",
-  "/logos/logo3.png",
-  "/logos/aljur.png",
-  "/logos/logo5.png",
-  "/logos/logo6.png",
-  "/logos/dingdongs.png",
-  "/logos/logo8.png",
+  "/logos/bir-icons.png",
+  "/logos/bsp-logonew.png",
+  "/logos/CDA-logo-RA11364-PNG.png",
+  "/logos/IC-logo-white-1.png",
+  "/logos/SEC-logo.png",
+ 
 ];
 
 const itemWidth = 200; // px width of each logo
@@ -29,7 +27,7 @@ const ClientCarousel = () => {
           x: {
             repeat: Infinity,
             repeatType: "loop",
-            duration: 30,
+            duration: 15,
             ease: "linear",
           },
         },
@@ -40,9 +38,9 @@ const ClientCarousel = () => {
   }, [controls, isHovered, totalWidth]);
 
   return (
-    <section className="max-w-7xl mx-auto px-4 mt-20">
+    <section className="min-h-[40vh] max-w-7xl mx-auto px-4 mt-20 bg-[]">
       <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
-        Our Clients
+        Firm Accreditation
       </h2>
 
       <div
