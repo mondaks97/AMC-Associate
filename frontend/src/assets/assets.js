@@ -1,7 +1,7 @@
 
 import amclogo from './amclogo.webp'
 import amc_wallpaper from './amc_wallpaper.jpg'
-import amc_image from './amc_image.jpg'
+import amc_image from './amc_image.JPG'
 import bg1 from './bg1.jpg'
 import bg2 from './bg2.jpg'
 import transparency from './transparency.png'
