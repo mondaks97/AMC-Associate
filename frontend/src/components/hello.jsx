@@ -178,3 +178,477 @@ export default hello
         </div>
       </div>
     </div>
+
+
+
+
+
+ <div className="grid md:grid-cols-5 gap-6">
+          {/* Basic Coverage */}
+          <div className="cursor-pointer bg-white p-8 rounded-lg text-center shadow-md hover:shadow-xl transition-transform duration-300 transform hover:-translate-y-7">
+            <div className="w-16 h-16 bg-gray-100 rounded-full mx-auto mb-6 flex items-center justify-center text-2xl">
+              <img src={assets.transparency} alt="Transparency" />
+            </div>
+            <h3 className="text-xl text-[#880000] font-bold mb-4">Transparency</h3>
+            <p className="text-gray-600 text-md font-md text-sm mb-6">
+              The guiding word for our audit process is dialogue. We keep management fully informed of the special attention. Our goal is to turn audit into a management information resource for our
+              clients.
+            </p>
+            {/* <a href="#" className="text-gray-600 text-sm">Learn More →</a> */}
+          </div>
+
+          {/* Standard Coverage */}
+          <div className="cursor-pointer bg-white p-8 rounded-lg text-center shadow-md hover:shadow-xl transition-transform duration-300 transform hover:-translate-y-7">
+            <div className="w-16 h-16 bg-gray-100 rounded-full mx-auto mb-6 flex items-center justify-center text-2xl">
+              <img src={assets.results_oriented} alt="Results-Oriented" />
+            </div>
+            <h3 className="text-xl text-[#880000] font-bold mb-4">Results-Oriented</h3>
+            <p className="text-gray-600 text-md font-md  text-sm mb-6">
+              We are committed to achieving results rather than merely the completion of tasks. We will be flexible and forward thinking to assure that the desired result is achieved.
+            </p>
+            {/* <a href="#" className="text-gray-600 text-sm">Learn More →</a> */}
+          </div>
+
+          {/* Premium Coverage */}
+          <div className="cursor-pointer bg-white p-8 rounded-lg text-center shadow-md hover:shadow-xl transition-transform duration-300 transform hover:-translate-y-7">
+            <div className="w-16 h-16 bg-gray-100 rounded-full mx-auto mb-6 flex items-center justify-center text-2xl">
+              <img src={assets.integrity} alt="Integrity" />
+            </div>
+            <h3 className="text-xl text-[#880000] font-bold mb-4">Integrity</h3>
+            <p className="text-gray-600 text-md font-md text-sm mb-6">
+              Our focus on doing business with customers strictly adheres to the code of ethics for certified public Accountants promulgated by local and international standard-setting organization.
+              We seriously consider ourselves to have a significant
+            </p>
+            {/* <a href="#" className="text-gray-600 text-sm">Learn More →</a> */}
+          </div>
+
+          {/* Custom Coverage */}
+          <div className="cursor-pointer bg-white p-8 rounded-lg text-center shadow-md hover:shadow-xl transition-transform duration-300 transform hover:-translate-y-7">
+            <div className="w-16 h-16 bg-gray-100 rounded-full mx-auto mb-6 flex items-center justify-center text-2xl">
+              <img src={assets.quality} alt="Quality" />
+            </div>
+            <h3 className="text-xl text-[#880000] font-bold mb-4">Quality</h3>
+            <p className="text-gray-600 text-md font-md mb-6">Providing quality service by focusing on our clients needs. Doing their project in the most efficient manner. We stand behind our work.</p>
+            {/* <a href="#" className="text-gray-600 text-sm">Learn More →</a> */}
+          </div>
+
+          {/* Enterprise Coverage */}
+          <div className="cursor-pointer bg-white p-8 rounded-lg text-center shadow-md hover:shadow-xl transition-transform duration-300 transform hover:-translate-y-7">
+            <div className="w-16 h-16 bg-gray-100 rounded-full mx-auto mb-6 flex items-center justify-center text-2xl">
+              <img src={assets.client_focused} alt="Client-Focused" />
+            </div>
+            <h3 className="text-xl text-[#880000] font-bold mb-4">Client-Focused</h3>
+            <p className="text-gray-600 text-md font-md text-sm mb-6">
+              Our clients and the business community can rely on us for independence and objectively two important ingredients of a successful accounting practice that we guard very closely.
+            </p>
+            {/* <a href="#" className="text-gray-600 text-sm">Learn More →</a> */}
+          </div>
+        </div>
+
+
+
+
+
+<div className="relative overflow-hidden max-w-lg m-2 sm:m-4 rounded-xl border border-gray-200 dark:border-gray-700 shadow-2xl shadow-gray-100 dark:shadow-white/10">
+      <div className="pointer-event-none blur-2xl rounded-full bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 w-[300px] h-[300px] absolute z-0 transition-opacity duration-500 mix-blend-lighten">
+        <div className="flex items-center gap-10 p-8 hover:p-7.5 hover:m-0.5 transition-all rounded-[10px] bg-white dark:bg-gray-900 z-10 relative">
+            <div>
+              <img src={assets} alt="" />
+            </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+<div>
+        <div className='flex flex-col md:grid grid-cols-2'>
+            {servicesData.map((service, index)=>(
+                <ServiceCard key={index} service={service} index={index}/>
+            ))}
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// navbar
+const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMobileDropdownOpen, setIsMobileDropdownOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  const links = ["Home", "About", "Services", "Features", "Contact Us"];
+  const dropdownItems = [
+    { name: "Career", path: "/Career" },
+    { name: "Blogs", path: "/blogs" },
+  ];
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      setScrolled(offset > 20);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+    setIsDropdownOpen(false);
+    setIsMobileDropdownOpen(false);
+  };
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const toggleMobileDropdown = () => {
+    setIsMobileDropdownOpen(!isMobileDropdownOpen);
+  };
+
+  return (
+    <motion.div
+    initial={{opacity: 0, y: -90}}
+    animate={{opacity: 1, y: 0}}
+    transition={{duration: 0.2, ease: 'easeOut'}}
+  className={`fixed w-full z-50 bg-white transition-all duration-300 ${
+    scrolled ? "shadow-md py-2" : "py-4"
+  }`}
+    >
+      <div className="container mx-auto px-3 sm:px-6 lg:px-10">
+        <div className="flex justify-between items-center">
+          {/* Logo */}
+          <Link
+            to="/"
+            onClick={() => {
+              closeMenu();
+              window.location.href = "/";
+            }}
+          >
+            <img
+              src={assets.amclogo}
+              alt="logo"
+              className="cursor-pointer w-24 sm:w-28 md:w-32 lg:w-25 h-auto"
+            />
+          </Link>
+
+          {/* Desktop Navigation Links */}
+          <ul className="hidden lg:flex font-medium space-x-4 xl:space-x-6">
+            {links.map((link) => (
+              <li key={link} className="relative">
+                {link === "Features" ? (
+                  <div className="relative">
+                    <button
+                      onClick={toggleDropdown}
+                      onMouseEnter={() => setIsDropdownOpen(true)}
+                      onMouseLeave={() => setIsDropdownOpen(false)}
+                      className="
+                        font-montserrat font-semibold relative inline-flex items-center px-3 xl:px-4 py-2 text-[#800000] text-sm xl:text-base
+                        transition-colors duration-300 hover:text-[#000099]
+                        after:content-[''] after:absolute after:left-0 after:bottom-0
+                        after:h-[2px] after:w-0 after:bg-[#000099]
+                        after:transition-all after:duration-500 after:ease-[cubic-bezier(0.68,-0.55,0.265,1.55)]
+                        hover:after:w-1/2
+                        before:content-[''] before:absolute before:right-0 before:bottom-0
+                        before:h-[2px] before:w-0 before:bg-[#000099]
+                        before:transition-all before:duration-500 before:ease-[cubic-bezier(0.68,-0.55,0.265,1.55)]
+                        hover:before:w-1/2
+                        whitespace-nowrap
+                      "
+                    >
+                      {link}
+                      <ChevronDown
+                        className={`ml-1 w-4 h-4 transition-transform duration-200 ${
+                          isDropdownOpen ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+
+                    {/* Desktop Dropdown */}
+                    <div
+                      className={`absolute top-full left-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg transition-all duration-200 ${
+                        isDropdownOpen
+                          ? "opacity-100 visible transform translate-y-0"
+                          : "opacity-0 invisible transform -translate-y-2"
+                      }`}
+                      onMouseEnter={() => setIsDropdownOpen(true)}
+                      onMouseLeave={() => setIsDropdownOpen(false)}
+                    >
+                      {dropdownItems.map((item) => (
+                        <Link
+                          key={item.name}
+                          to={item.path}
+                          className="font-montserrat font-semibold text-base block px-4 py-3 text-[#800000] hover:text-[#000099] hover:bg-gray-50 transition-colors duration-200 first:rounded-t-lg last:rounded-b-lg"
+                          onClick={() => setIsDropdownOpen(false)}
+                        >
+                          {item.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <Link
+                    to={`/${link.toLowerCase().replace(/\s+/g, "-")}`}
+                    className="
+                      font-montserrat font-semibold relative inline-block px-3 xl:px-4 py-2 text-[#800000] text-sm xl:text-base
+                      transition-colors duration-300 hover:text-[#000099]
+                      after:content-[''] after:absolute after:left-0 after:bottom-0
+                      after:h-[2px] after:w-0 after:bg-[#000099]
+                      after:transition-all after:duration-500 after:ease-[cubic-bezier(0.68,-0.55,0.265,1.55)]
+                      hover:after:w-1/2
+                      before:content-[''] before:absolute before:right-0 before:bottom-0
+                      before:h-[2px] before:w-0 before:bg-[#000099]
+                      before:transition-all before:duration-500 before:ease-[cubic-bezier(0.68,-0.55,0.265,1.55)]
+                      hover:before:w-1/2
+                      whitespace-nowrap
+                    "
+                  >
+                    {link}
+                  </Link>
+                )}
+              </li>
+            ))}
+          </ul>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={toggleMenu}
+            className="lg:hidden p-2 text-[#800000] hover:text-[#000099] transition-colors duration-300"
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+
+        {/* Mobile Navigation Menu */}
+        <div
+          className={`lg:hidden transition-all duration-300 ease-in-out overflow-hidden ${
+            isMenuOpen ? "max-h-96 opacity-100 mt-4" : "max-h-0 opacity-0"
+          }`}
+        >
+          <ul className="flex flex-col space-y-2 pb-4 border-t border-gray-100 pt-4">
+            {links.map((link) => (
+              <li key={link}>
+                {link === "Features" ? (
+                  <div>
+                    <button
+                      onClick={toggleMobileDropdown}
+                      className="
+                        flex items-center justify-between w-full px-4 py-3 text-[#800000] hover:text-[#000099] 
+                        hover:bg-gray-50 rounded-md transition-all duration-300
+                        text-base font-medium
+                      "
+                    >
+                      {link}
+                      <ChevronDown
+                        className={`w-4 h-4 transition-transform duration-200 ${
+                          isMobileDropdownOpen ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+
+                     {/* Mobile Dropdown */}
+                    <div
+                      className={`overflow-hidden transition-all duration-300 ${
+                        isMobileDropdownOpen
+                          ? "max-h-48 opacity-100"
+                          : "max-h-0 opacity-0"
+                      }`}
+                    >
+                      {dropdownItems.map((item) => (
+                        <Link
+                          key={item.name}
+                          to={item.path}
+                          onClick={closeMenu}
+                          className=" block pl-8 pr-4 py-2 text-[#800000] hover:text-[#000099] hover:bg-gray-50 rounded-md transition-all duration-300 text-sm font-medium"
+                        >
+                          {item.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <Link
+                    to={`/${link.toLowerCase().replace(/\s+/g, "-")}`}
+                    onClick={closeMenu}
+                    className="
+                      block px-4 py-3 text-[#800000] hover:text-[#000099] 
+                      hover:bg-gray-50 rounded-md transition-all duration-300
+                      text-base font-medium
+                    "
+                  >
+                    {link}
+                  </Link>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </motion.div>
+
+    //Carousel
+    import { useState, useEffect } from "react";
+import { motion, useAnimation } from "framer-motion";
+
+const logos = [
+  "/logos/bir-icons.png",
+  "/logos/bsp-logonew.png",
+  "/logos/CDA-logo-RA11364-PNG.png",
+  "/logos/IC-logo-white-1.png",
+  "/logos/SEC-logo.png",
+ 
+];
+
+const itemWidth = 200; // px width of each logo
+const gap = 24; // gap between logos in px
+
+const ClientCarousel = () => {
+  const controls = useAnimation();
+  const [isHovered, setIsHovered] = useState(false);
+
+  const totalWidth = logos.length * (itemWidth + gap);
+
+  useEffect(() => {
+    if (!isHovered) {
+      controls.start({
+        x: [-totalWidth, 0], // animate from right to left
+        transition: {
+          x: {
+            repeat: Infinity,
+            repeatType: "loop",
+            duration: 15,
+            ease: "linear",
+          },
+        },
+      });
+    } else {
+      controls.stop();
+    }
+  }, [controls, isHovered, totalWidth]);
+
+  return (
+    <section className="min-h-[40vh] max-w-7xl mx-auto px-4 mt-20 mb-10">
+      <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
+        Firm Accreditation
+      </h2>
+
+      <div
+        className="overflow-hidden relative w-full h-[120px]"
+        style={{
+          maskImage:
+            "linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, rgba(0,0,0,0))",
+        }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <motion.div
+          animate={controls}
+          className="flex space-x-6 absolute left-0 top-0 h-[120px]"
+          style={{ width: totalWidth * 2 }}
+        >
+          {logos.concat(logos).map((src, i) => (
+            <img
+              key={i}
+              src={src}
+              alt={`client logo ${i + 1}`}
+              draggable={false}
+              className="h-[100px] object-contain select-none rounded-md"
+              style={{ width: itemWidth }}
+            />
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+export default ClientCarousel;
+
+
+
+//philosophy
+import AnimatedButton from "./AnimatedButton.jsx"; 
+import { assets } from "../assets/assets";
+import { motion } from "framer-motion"
+
+const Philosophy = () => {
+  return (
+    <motion.div
+    initial={{ opacity: 0, y: 50 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8 }}
+    viewport={{ once: true }}
+     className="min-h-screen bg-gray-50 px-6 md:px-12 lg:px-24">
+
+      <div className="grid lg:grid-cols-12 gap-10 items-center">
+        {/* Left Column */}
+        <motion.div
+        initial={{ opacity: 0, y: -30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        viewport={{ once: true }}
+        className="lg:col-span-5 mt-20">
+          <h2 className="text-4xl md:text-6xl font-bold text-[#000099] leading-tight">
+            Our Philosophy
+          </h2>
+
+          <p className="text-gray-600 mt-6 text-base md:text-lg">
+            We dedicate ourselves to providing superior and high-quality services of audit, accounting, tax, and business process outsourcing in a timely, effective, and efficient manner maintaining the highest standards of professional integrity. We consider our responsibility to embrace responsiveness to our client’s requirements for their business, special opportunities, and challenges that confront them. We foster an enjoyable working environment through open communication, mutual respect, teamwork, continuous innovation, and loyalty to perform our tradition of services and leadership.
+          </p>
+
+          {/* Replace original button here */}
+          <div className="mt-8">
+            <AnimatedButton label="Know more about us" to="/about" />
+          </div>
+        </motion.div>
+
+        {/* Right Column */}
+        <motion.div
+        initial={{ opacity: 0, x: 30 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+        viewport={{ once: true }}
+        className="lg:col-span-7 mt-7">
+          <div className="relative w-full">
+            <img
+              src={assets.amc_image}
+              alt="Image"
+              className="w-full h-full rounded-lg object-cover"
+            />
+
+            {/* Since Badge */}
+            <div className="absolute bottom-4 left-4  text-white px-4 py-2 rounded shadow-lg text-left">
+              <span className="text-xs">Since</span>
+              <div className="text-3xl font-bold">2002</div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+};
+
+export default Philosophy;

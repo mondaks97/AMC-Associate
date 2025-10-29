@@ -1,193 +1,165 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { ChevronDown } from "lucide-react";
 import { assets } from "../assets/assets";
+import { HiMenu, HiX } from "react-icons/hi";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isMobileDropdownOpen, setIsMobileDropdownOpen] = useState(false);
-  
-  const links = ["Home", "About", "Services", "Features", "Contact Us"];
-  const dropdownItems = [
-    { name: "Jobs", path: "/Jobs" },
-    { name: "Blogs", path: "/blogs" },
+  const [isShrunk, setIsShrunk] = useState(false);
+  const location = useLocation();
+
+  // ✅ Scroll + Shrink effect
+  useEffect(() => {
+    const handleScroll = () => setIsShrunk(window.scrollY > 10);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // ✅ Highlight active page
+  const activePath = location.pathname;
+
+  const navLinks = [
+    { to: "/", label: "Home" },
+    { to: "/about", label: "About Us" },
+    { to: "/services", label: "Our Services" },
+    {
+      label: "Features",
+      dropdown: [
+        { to: "/blog", label: "Blog" },
+        { to: "/news", label: "News" },
+        { to: "/jobs", label: "Jobs" },
+      ],
+    },
   ];
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-    setIsDropdownOpen(false);
-    setIsMobileDropdownOpen(false);
-  };
-
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
-
-  const toggleMobileDropdown = () => {
-    setIsMobileDropdownOpen(!isMobileDropdownOpen);
-  };
-
   return (
-    <nav className="bg-white fixed w-full shadow-sm z-50">
-      <div className="container mx-auto px-3 sm:px-6 lg:px-10 py-3 sm:py-4">
-        <div className="flex justify-between items-center">
-          {/* Logo */}
-          <Link
-            to="/"
-            onClick={() => {
-              closeMenu();
-              window.location.href = '/';
-            }}
-          >
-            <img
-              src={assets.amclogo}
-              alt="logo"
-              className="cursor-pointer w-24 sm:w-28 md:w-32 lg:w-30 h-auto"
-            />
-          </Link>
+    <nav
+      className={`fixed top-0 left-0 right-0 backdrop-blur-sm z-50 border-b border-gray-100 transition-all duration-300
+      ${isShrunk ? "bg-white/95 shadow-md md:h-16 h-14" : "bg-white/80 shadow-none md:h-20 h-16"}`}
+    >
+      <div className="container mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 h-full">
 
-          {/* Desktop Navigation Links */}
-          <ul className="hidden lg:flex font-medium space-x-4 xl:space-x-6">
-            {links.map((link) => (
-              <li key={link} className="relative">
-                {link === "Features" ? (
-                  <div className="relative">
-                    <button
-                      onClick={toggleDropdown}
-                      onMouseEnter={() => setIsDropdownOpen(true)}
-                      onMouseLeave={() => setIsDropdownOpen(false)}
-                      className="
-                        relative inline-flex items-center px-3 xl:px-4 py-2 text-[#800000] text-sm xl:text-base
-                        transition-colors duration-300 hover:text-[#000099]
-                        after:content-[''] after:absolute after:left-0 after:bottom-0
-                        after:h-[2px] after:w-0 after:bg-[#000099]
-                        after:transition-all after:duration-500 after:ease-[cubic-bezier(0.68,-0.55,0.265,1.55)]
-                        hover:after:w-1/2
-                        before:content-[''] before:absolute before:right-0 before:bottom-0
-                        before:h-[2px] before:w-0 before:bg-[#000099]
-                        before:transition-all before:duration-500 before:ease-[cubic-bezier(0.68,-0.55,0.265,1.55)]
-                        hover:before:w-1/2
-                        whitespace-nowrap
-                      "
-                    >
-                      {link}
-                      <ChevronDown className={`ml-1 w-4 h-4 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} />
-                    </button>
-                    
-                    {/* Desktop Dropdown */}
-                    <div 
-                      className={`absolute top-full left-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg transition-all duration-200 ${
-                        isDropdownOpen ? 'opacity-100 visible transform translate-y-0' : 'opacity-0 invisible transform -translate-y-2'
-                      }`}
-                      onMouseEnter={() => setIsDropdownOpen(true)}
-                      onMouseLeave={() => setIsDropdownOpen(false)}
-                    >
-                      {dropdownItems.map((item) => (
-                        <Link
-                          key={item.name}
-                          to={item.path}
-                          className="block px-4 py-3 text-[#800000] hover:text-[#000099] hover:bg-gray-50 transition-colors duration-200 first:rounded-t-lg last:rounded-b-lg"
-                          onClick={() => setIsDropdownOpen(false)}
-                        >
-                          {item.name}
-                        </Link>
-                      ))}
-                    </div>
+        {/* Logo */}
+        <Link to="/" className="flex items-center">
+          <img
+            className={`transition-all duration-300 ${isShrunk ? "w-16" : "w-20"}`}
+            src={assets.amclogo}
+            alt="amc_logo"
+          />
+        </Link>
+
+        {/* Mobile Toggle */}
+        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden p-2">
+          {isMenuOpen ? <HiX className="size-6" /> : <HiMenu className="size-6" />}
+        </button>
+
+        {/* Desktop Menu */}
+        <div className="hidden md:flex items-center gap-10">
+          {navLinks.map((link, index) => (
+            <div key={index} className="relative group">
+              {!link.dropdown ? (
+                <Link
+                  to={link.to}
+                  className={`text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-blue-600 after:transition-all ${
+                    activePath === link.to
+                      ? "text-blue-600 after:w-full"
+                      : "text-gray-600 hover:text-gray-900"
+                  }`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <>
+                  <button className="text-sm font-medium text-gray-600 hover:text-gray-900 flex items-center gap-1">
+                    {link.label}
+                    <ChevronDown size={16} />
+                  </button>
+                  <div className="absolute left-0 top-full opacity-0 scale-y-0 group-hover:opacity-100 group-hover:scale-y-100 transform origin-top transition-all duration-200 bg-white shadow-lg rounded-lg py-2 w-44 border border-gray-100 z-50">
+                    {link.dropdown.map((item, subIndex) => (
+                      <Link
+                        key={subIndex}
+                        to={item.to}
+                        className={`block px-4 py-2 text-sm hover:bg-gray-50 ${
+                          activePath === item.to
+                            ? "text-blue-600 font-medium"
+                            : "text-gray-600 hover:text-gray-900"
+                        }`}
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
                   </div>
-                ) : (
-                  <Link
-                    to={`/${link.toLowerCase().replace(/\s+/g, "-")}`}
-                    className="
-                      relative inline-block px-3 xl:px-4 py-2 text-[#800000] text-sm xl:text-base
-                      transition-colors duration-300 hover:text-[#000099]
-                      after:content-[''] after:absolute after:left-0 after:bottom-0
-                      after:h-[2px] after:w-0 after:bg-[#000099]
-                      after:transition-all after:duration-500 after:ease-[cubic-bezier(0.68,-0.55,0.265,1.55)]
-                      hover:after:w-1/2
-                      before:content-[''] before:absolute before:right-0 before:bottom-0
-                      before:h-[2px] before:w-0 before:bg-[#000099]
-                      before:transition-all before:duration-500 before:ease-[cubic-bezier(0.68,-0.55,0.265,1.55)]
-                      hover:before:w-1/2
-                      whitespace-nowrap
-                    "
-                  >
-                    {link}
-                  </Link>
-                )}
-              </li>
-            ))}
-          </ul>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={toggleMenu}
-            className="lg:hidden p-2 text-[#800000] hover:text-[#000099] transition-colors duration-300"
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+                </>
+              )}
+            </div>
+          ))}
         </div>
 
-        {/* Mobile Navigation Menu */}
-        <div
-          className={`lg:hidden transition-all duration-300 ease-in-out overflow-hidden ${
-            isMenuOpen ? "max-h-96 opacity-100 mt-4" : "max-h-0 opacity-0"
+        {/* Contact Button */}
+        <Link
+          to="/contact"
+          className={`hidden md:block bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 text-sm font-medium transition-all hover:shadow-lg ${
+            activePath === "/contact" ? "bg-blue-700" : ""
           }`}
         >
-          <ul className="flex flex-col space-y-2 pb-4 border-t border-gray-100 pt-4">
-            {links.map((link) => (
-              <li key={link}>
-                {link === "Features" ? (
-                  <div>
-                    <button
-                      onClick={toggleMobileDropdown}
-                      className="
-                        flex items-center justify-between w-full px-4 py-3 text-[#800000] hover:text-[#000099] 
-                        hover:bg-gray-50 rounded-md transition-all duration-300
-                        text-base font-medium
-                      "
-                    >
-                      {link}
-                      <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isMobileDropdownOpen ? 'rotate-180' : ''}`} />
-                    </button>
-                    
-                    {/* Mobile Dropdown */}
-                    <div className={`overflow-hidden transition-all duration-300 ${isMobileDropdownOpen ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'}`}>
-                      {dropdownItems.map((item) => (
-                        <Link
-                          key={item.name}
-                          to={item.path}
-                          onClick={closeMenu}
-                          className="block pl-8 pr-4 py-2 text-[#800000] hover:text-[#000099] hover:bg-gray-50 rounded-md transition-all duration-300 text-sm font-medium"
-                        >
-                          {item.name}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                ) : (
-                  <Link
-                    to={`/${link.toLowerCase().replace(/\s+/g, "-")}`}
-                    onClick={closeMenu}
-                    className="
-                      block px-4 py-3 text-[#800000] hover:text-[#000099] 
-                      hover:bg-gray-50 rounded-md transition-all duration-300
-                      text-base font-medium
-                    "
-                  >
-                    {link}
-                  </Link>
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
+          Contact Us
+        </Link>
       </div>
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="md:hidden bg-white border-t border-gray-100 py-4">
+          <div className="px-4 space-y-4">
+            {navLinks.map((link, index) =>
+              !link.dropdown ? (
+                <Link
+                  key={index}
+                  to={link.to}
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`block text-sm ${
+                    activePath === link.to
+                      ? "text-blue-600 font-medium"
+                      : "text-gray-600 hover:text-blue-600"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <div key={index}>
+                  <p className="text-gray-400 text-xs uppercase">{link.label}</p>
+                  {link.dropdown.map((item, subIndex) => (
+                    <Link
+                      key={subIndex}
+                      to={item.to}
+                      onClick={() => setIsMenuOpen(false)}
+                      className={`block py-1 text-sm ${
+                        activePath === item.to
+                          ? "text-blue-600 font-medium"
+                          : "text-gray-600 hover:text-blue-600"
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              )
+            )}
+
+            <Link
+              to="/contact"
+              onClick={() => setIsMenuOpen(false)}
+              className={`block w-full bg-blue-600 text-white text-center py-2.5 rounded-lg hover:bg-blue-700 text-sm font-medium ${
+                activePath === "/contact" ? "bg-blue-700" : ""
+              }`}
+            >
+              Contact Us
+            </Link>
+          </div>
+        </div>
+      )}
     </nav>
   );
 };

@@ -1,168 +1,204 @@
 import { motion } from "framer-motion";
-import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
 import { assets } from "../assets/assets";
 import bg from "../assets/bg.jpg";
 
 const Footer = () => {
+  const fadeUpItem = {
+    hidden: { opacity: 0, y: 10 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.4,
+        ease: "easeOut",
+      },
+    },
+  };
+
   return (
-    <footer className=" bg-white text-gray-900">
+    <footer className="bg-white text-gray-900 overflow-hidden">
       {/* CTA Section */}
-      <div className="relative z-10 max-w-5xl mx-auto">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="relative z-20 text-white p-8 md:p-10 rounded-3xl shadow-xl bg-cover bg-center"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="relative text-white p-5 sm:p-6 md:p-8 rounded-2xl shadow-lg bg-cover bg-center overflow-hidden"
           style={{ backgroundImage: `url(${bg})` }}
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 h-full">
-            {/* Left Side: Text Content */}
-            <div className="flex flex-col justify-center">
-              <h2 className="text-2xl md:text-3xl font-semibold mb-4">
-                WALANG PANG MAISIP NA ILALAGAY
-              </h2>
-              <p className="text-gray-300 text-sm">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Consequuntur reiciendis dolore ad porro cumque illo, doloremque
-                aperiam nihil quasi perspiciatis nisi, nam pariatur tempore
-                itaque modi expedita iure omnis fuga?
-              </p>
-            </div>
+          {/* Softer Overlay for Corporate Tone */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#5f6fff]/90 via-[#7a85ff]/70 to-[#9ea6ff]/60 z-0"></div>
 
-            {/* Right Side: Full-Height Google Map */}
-            <div className="h-full">
+          <div className="relative grid grid-cols-1 md:grid-cols-2 gap-6 items-center z-10">
+            {/* Left Side - Info */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="flex flex-col justify-center space-y-2"
+            >
+             <h2 className="text-xl md:text-3xl font-semibold tracking-wide text-white">
+  Our Office
+</h2>
+<div className="w-37 h-[2px] bg-white/80 mb-3"></div>
+
+<p className="text-gray-100 text-[20px] md:text-base leading-relaxed max-w-md">
+  Visit AMC & Associates — where professionalism, precision, and trust come
+  together in every engagement.
+</p>
+
+            </motion.div>
+
+            {/* Right Side - Google Map */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.97 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              viewport={{ once: true }}
+              className="relative rounded-xl overflow-hidden shadow-md border border-white/10 transform-gpu will-change-transform"
+              whileHover={{ scale: 1.02 }}
+            >
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7723.35394112818!2d121.01467377494839!3d14.560456085921217!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c9096ec55555%3A0xfc5936b371540697!2sAMC%20%26%20Associates!5e0!3m2!1sen!2sph!4v1751982300441!5m2!1sen!2sph"
+                className="w-full h-44 sm:h-56 md:h-64 cursor-pointer"
                 style={{ border: 0 }}
-                allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                className="rounded-lg w-full h-full min-h-[250px]"
               ></iframe>
-            </div>
+            </motion.div>
           </div>
         </motion.div>
       </div>
+
       {/* Footer Section */}
-      <div className="relative mt-[-11rem] z-0">
-        {/* Only the background container is moved up */}
-        <div className="bg-[#F2F2F2] text-gray-300 rounded-t-3xl shadow-lg overflow-hidden">
-          {/* Footer Content */}
-          <div className="max-w-7xl mx-auto px-6 pt-[14rem] pb-20 flex flex-col md:flex-row md:items-start gap-8">
+      <div className="relative mt-[-8rem] z-0">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="bg-gradient-to-b from-[#fafafa] to-[#f2f2f2] text-gray-300 rounded-t-3xl shadow-lg overflow-hidden backdrop-blur-sm"
+          variants={{
+            visible: {
+              transition: { staggerChildren: 0.2, ease: "easeInOut" },
+            },
+          }}
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-[14rem] pb-20 flex flex-col md:flex-row md:items-start gap-10">
             {/* Logo & Address */}
-            <div className="md:flex-shrink-0 md:w-1/4">
+            <motion.div variants={fadeUpItem} className="md:w-1/4">
               <img
-                className="mb-4 w-32 h-auto"
                 src={assets.amclogo}
                 alt="AMC Logo"
+                className="mb-4 w-36 h-auto brightness-90 hover:brightness-110 transition-all duration-300"
               />
               <p className="text-[#0F0E0E] font-semibold text-sm leading-relaxed">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
                 asperiores, suscipit error perferendis repellat id alias ipsa
-                commodi? Repellendus earum perspiciatis dignissimos tempore
-                adipisci, illum cumque corporis similique eos facilis.
+                commodi?
               </p>
-            </div>
+            </motion.div>
 
-            {/* Links wrapper pushed right */}
-            <div className="md:flex md:w-3/4 md:gap-45 md:pl-45">
+            {/* Links */}
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 10 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { staggerChildren: 0.15, ease: "easeInOut" },
+                },
+              }}
+              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:w-3/4 md:pl-20"
+            >
               {/* Quick Links */}
-              <div>
-                <h4 className="text-[#880000] font-bold mb-3">Quick Links</h4>
+              <motion.div variants={fadeUpItem}>
+                <h4 className="text-[#880000] font-bold mb-3 uppercase tracking-wide">
+                  Quick Links
+                </h4>
                 <ul className="space-y-2 text-sm text-[#0F0E0E] font-semibold">
-                  <li>
-                    <a href="#" className="hover:underline">
-                      Lorem
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="hover:underline">
-                      Lorem
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="hover:underline">
-                      Lorem
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="hover:underline">
-                      Lorem
-                    </a>
-                  </li>
+                  {["Home", "Services", "About", "Contact"].map((link, i) => (
+                    <motion.li key={i} variants={fadeUpItem}>
+                      <a
+                        href="#"
+                        className="hover:text-[#880000] hover:translate-x-1 inline-block transition-all duration-300"
+                      >
+                        {link}
+                      </a>
+                    </motion.li>
+                  ))}
                 </ul>
-              </div>
+              </motion.div>
 
               {/* Social Media */}
-              <div>
-  <h4 className="text-[#880000] font-bold mb-3">Social Media</h4>
-  <ul className="space-y-2 text-sm text-[#0F0E0E] font-semibold">
-    <li className="flex items-center gap-2 hover:scale-105 transition-all duration-200 p-1 rounded-lg cursor-pointer">
-      <img
-        src={assets.facebook}
-        alt="Facebook"
-        className="w-6 h-6 hover:scale-110 transition-transform duration-200"
-      />
-      <a href="#" className="hover:text-[#880000] transition-colors duration-200">Facebook</a>
-    </li>
-    <li className="flex items-center gap-2 hover:scale-105 transition-all duration-200 p-1 rounded-lg cursor-pointer">
-      <img
-        src={assets.twitter}
-        alt="Twitter"
-        className="w-6 h-6 hover:scale-110 transition-transform duration-200"
-      />
-      <a href="#" className="hover:text-[#880000] transition-colors duration-200">Twitter</a>
-    </li>
-    <li className="flex items-center gap-2 hover:scale-105 transition-all duration-200 p-1 rounded-lg cursor-pointer">
-      <img
-        src={assets.instagram}
-        alt="Instagram"
-        className="w-6 h-6 hover:scale-110 transition-transform duration-200"
-      />
-      <a href="#" className="hover:text-[#880000] transition-colors duration-200">Instagram</a>
-    </li>
-    <li className="flex items-center gap-2 hover:scale-105 transition-all duration-200 p-1 rounded-lg cursor-pointer">
-      <img
-        src={assets.linkedin}
-        alt="LinkedIn"
-        className="w-6 h-6 hover:scale-110 transition-transform duration-200"
-      />
-      <a href="#" className="hover:text-[#880000] transition-colors duration-200">LinkedIn</a>
-    </li>
-  </ul>
-</div>
+              <motion.div variants={fadeUpItem}>
+                <h4 className="text-[#880000] font-bold mb-3 uppercase tracking-wide">
+                  Social Media
+                </h4>
+                <ul className="space-y-2 text-sm text-[#0F0E0E] font-semibold">
+                  {[
+                    { icon: assets.facebook, label: "Facebook" },
+                    { icon: assets.twitter, label: "Twitter" },
+                    { icon: assets.instagram, label: "Instagram" },
+                    { icon: assets.linkedin, label: "LinkedIn" },
+                  ].map(({ icon, label }, idx) => (
+                    <motion.li
+                      key={idx}
+                      variants={fadeUpItem}
+                      className="flex items-center gap-2 hover:translate-x-1 transition-all duration-300 cursor-pointer"
+                    >
+                      <img
+                        src={icon}
+                        alt={label}
+                        className="w-6 h-6 hover:scale-110 transition-transform duration-200"
+                      />
+                      <a
+                        href="#"
+                        className="hover:text-[#880000] transition-colors duration-200"
+                      >
+                        {label}
+                      </a>
+                    </motion.li>
+                  ))}
+                </ul>
+              </motion.div>
 
               {/* Legal */}
-              <div>
-                <h4 className="text-[#880000] font-bold mb-3">Legal</h4>
+              <motion.div variants={fadeUpItem}>
+                <h4 className="text-[#880000] font-bold mb-3 uppercase tracking-wide">
+                  Legal
+                </h4>
                 <ul className="space-y-2 text-sm text-[#0F0E0E] font-semibold">
-                  <li>
-                    <a href="#" className="hover:underline">
-                      Terms of Service
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="hover:underline">
-                      Privacy Policy
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="hover:underline">
-                      Cookie Policy
-                    </a>
-                  </li>
+                  {["Terms of Service", "Privacy Policy", "Cookie Policy"].map(
+                    (item, i) => (
+                      <motion.li key={i} variants={fadeUpItem}>
+                        <a
+                          href="#"
+                          className="hover:text-[#880000] hover:translate-x-1 inline-block transition-all duration-300"
+                        >
+                          {item}
+                        </a>
+                      </motion.li>
+                    )
+                  )}
                 </ul>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
 
           {/* Bottom Bar */}
-          <div className="text-[#0F0E0E] font-md border-t border-gray-700 text-center py-4 text-sm">
-            Copyright © 2025 AMC & ASSOCIATES. All rights reserved.
+          <div className="text-[#0F0E0E] font-medium border-t border-gray-300/80 text-center py-4 text-sm bg-[#ececec]">
+            © 2025{" "}
+            <span className="text-[#880000] font-semibold">
+              AMC & ASSOCIATES
+            </span>
+            . All rights reserved.
           </div>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );
 };
+
 export default Footer;

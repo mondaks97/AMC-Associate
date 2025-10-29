@@ -2,14 +2,19 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 const ScrollToTop = () => {
-  const { pathname } = useLocation(); // Automatically gets current route
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth", // Smooth scroll to top
-    });
-  }, [pathname]); // Runs every time the URL path changes
+    // Use RAF for smoother transition after route mount
+    const timeout = setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }, 100); // small delay ensures DOM is ready
+
+    return () => clearTimeout(timeout);
+  }, [pathname]);
 
   return null;
 };

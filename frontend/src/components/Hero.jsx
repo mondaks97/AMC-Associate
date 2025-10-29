@@ -3,31 +3,33 @@ import { assets } from "../assets/assets";
 
 const Hero = () => {
   return (
-   <section className="relative min-h-screen bg-transparent flex items-center px-15">
+  <section id="home" className="relative min-h-screen w-full bg-transparent flex items-center px-4 sm:px-6 md:px-10">
   {/* Background Image Container */}
   <div className="absolute inset-0">
     {/* Overlay for better text readability */}
     {/* <div className="absolute inset-0 bg-black/10 z-10" /> */}
     <motion.img
+      // src={assets.amc_wallpaper}
       src={assets.bg2}
       alt="Background Image"
-      className="w-full h-full object-cover object-[center_30%]"
+      className="absolute inset-0 w-full h-full object-cover object-[center_30%] z-0"
     />
   </div>
       
       {/* Additional overlay */}
-      <div className="absolute inset-0 bg-black/50 z-20"></div>
+      <div className="absolute inset-0 bg-black/50 z-10"/>
       
-      <div className="relative z-30 py-16 mt-27">
-        <div className="grid lg:grid-cols-1 items-center">
-          <div>
-            <motion.h1
-              initial={{ x: -100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 1, duration: 1 }}
-              className="text-5xl lg:text-8xl font-bold text-white leading-tight mb-4"
-            >
-              We take your Business Personally
+      <div className="relative z-20 w-full py-16 mt-25">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 items-center">
+            <div>
+              <motion.h1
+                initial={{ x: -100, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 1, duration: 1 }}
+                className="font-playfair text-5xl lg:text-7xl font-bold text-white leading-tight mb-4"
+              >
+              We take your Business <br></br>Personally
             </motion.h1>
 
             <motion.div 
@@ -50,6 +52,7 @@ const Hero = () => {
             </motion.div>
           </div>
         </div>
+      </div>
       </div>
     </section>
   );

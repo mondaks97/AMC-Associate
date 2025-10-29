@@ -126,15 +126,19 @@ const Accordion = () => {
   return (
     <div className="min-h-screen bg-gray-50 px-5 py-5">
       {/* Hero Section */}
-      <section className="relative mt-25 bg-[#000099] px-4 rounded-2xl sm:px-6 lg:px-35 py-12 sm:py-16 lg:py-5">
+      <section className="relative mt-25 bg-[#5f6fff] px-4 rounded-2xl sm:px-6 lg:px-35 py-12 sm:py-16 lg:py-7">
         <div className="container mx-auto px-6 py-11 grid lg:grid-cols-2 gap-6 items-center relative z-10">
           <div>
-            <h1 className="text-4xl md:text-4xl font-bold text-white leading-tight mb-4">Services</h1>
-            <p className="text-white text-lg max-w-lg">AMC is your partner and provides support for your key accounting and administrative activities, such as outsourced accounting, payroll, and accounting-relatable tasks.</p>
+           <div className="inline-block px-6 py-2 border-2 border-white rounded-md">
+              <h1 className="text-4xl md:text-4xl font-bold text-white leading-tight">
+                Services
+              </h1>
+            </div>
+            <p className="text-white text-[16px] mt-4 max-w-lg">AMC is your partner and provides support for your key accounting and administrative activities, such as outsourced accounting, payroll, and accounting-relatable tasks.</p>
           </div>
         </div>
         {/* Hero Image Placeholder - taller */}
-        <img className="w-full h-90 bg-gray-200 rounded-xl shadow-lg absolute top-[40px] bottom-[-90px] right-6 lg:right-40 max-w-[25%]" src={assets.amc_image} alt="" />
+        <img className="w-full h-80 bg-gray-200 rounded-xl shadow-lg absolute top-[40px] bottom-[-90px] right-6 lg:right-40 max-w-[30%]" src={assets.amc_image} alt="" />
       </section>
 
       {/* Services Section */}

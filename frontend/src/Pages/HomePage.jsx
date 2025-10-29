@@ -1,5 +1,6 @@
 import AboutUs from "../components/AboutUs";
 import Banner from "../components/Banner";
+import Blog from "../components/Blog";
 import ClientLogos from "../components/ClientLogos";
 import ContactUs from "../components/ContactUs";
 import Footer from "../components/Footer";
@@ -13,11 +14,12 @@ const HomePage = () => {
     <>
       <Navbar/>
       <Hero/>
+      <ClientLogos/>
       <Philosophy/>
-      <AboutUs/>
+      {/* <Blog/> */}
+      {/* <AboutUs/> */}
       <Banner/>
       <Services/>
-      <ClientLogos/>
       {/* <ContactUs/> */}
       {/* <Footer/> */}
     </>

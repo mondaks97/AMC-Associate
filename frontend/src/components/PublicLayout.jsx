@@ -7,7 +7,7 @@ import { Outlet } from 'react-router-dom';
 const PublicLayout = () => {
   return (
     <div>
-      <ScrollToTop />
+      {/* <ScrollToTop /> */}
       <Navbar />
       <div className="main-content">
         <Outlet />
