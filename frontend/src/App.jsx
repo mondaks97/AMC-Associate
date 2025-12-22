@@ -7,6 +7,7 @@ import HomePage from "./Pages/HomePage";
 import AboutPage from "./Pages/AboutPage";
 import ServicesPage from "./Pages/ServicesPage";
 import PartnersPage from "./Pages/PartnersPage";
+import ContactPage from "./Pages/ContactPage";
 import BlogPage from "./Pages/BlogPage";
 import ApplyPage from "./Pages/ApplyPage";
 import Layout from "./Pages/admin/Layout.jsx";
@@ -66,8 +67,11 @@ const App = () => {
           <Route path="/home" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/services" element={<ServicesPage />} />
+          <Route path="/partners" element={<PartnersPage />} />
           <Route path="/apply" element={<ApplyPage />} />
           <Route path="/blogs" element={<BlogPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          
         </Route>
 
         {/* Admin Routes */}

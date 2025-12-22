@@ -23,13 +23,14 @@ const Navbar = () => {
     { to: "/", label: "Home" },
     { to: "/about", label: "About Us" },
     { to: "/services", label: "Our Services" },
+    { to: "/partners", label: "Meet Our Partners" },
     {
-      label: "Features",
-      dropdown: [
-        { to: "/blog", label: "Blog" },
-        { to: "/news", label: "News" },
-        { to: "/jobs", label: "Jobs" },
-      ],
+      // label: "Features",
+      // dropdown: [
+      //   { to: "/blog", label: "Blog" },
+      //   { to: "/news", label: "News" },
+      //   { to: "/jobs", label: "Jobs" },
+      // ],
     },
   ];
 
@@ -61,9 +62,9 @@ const Navbar = () => {
               {!link.dropdown ? (
                 <Link
                   to={link.to}
-                  className={`text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-blue-600 after:transition-all ${
+                  className={`text-md font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-[#000099] after:transition-all ${
                     activePath === link.to
-                      ? "text-blue-600 after:w-full"
+                      ? "text-[#000099] after:w-full"
                       : "text-gray-600 hover:text-gray-900"
                   }`}
                   onClick={() => setIsMenuOpen(false)}
@@ -83,7 +84,7 @@ const Navbar = () => {
                         to={item.to}
                         className={`block px-4 py-2 text-sm hover:bg-gray-50 ${
                           activePath === item.to
-                            ? "text-blue-600 font-medium"
+                            ? "text-[#000099] font-medium"
                             : "text-gray-600 hover:text-gray-900"
                         }`}
                         onClick={() => setIsMenuOpen(false)}
@@ -101,8 +102,8 @@ const Navbar = () => {
         {/* Contact Button */}
         <Link
           to="/contact"
-          className={`hidden md:block bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 text-sm font-medium transition-all hover:shadow-lg ${
-            activePath === "/contact" ? "bg-blue-700" : ""
+          className={`hidden md:block bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-[#000099] text-sm font-medium transition-all hover:shadow-lg ${
+            activePath === "/contact" ? "bg-[#000099]" : ""
           }`}
         >
           Contact Us

@@ -32,7 +32,11 @@ const Philosophy = () => {
   };
 
   return (
-    <section className="mx-auto px-[30px] md:px-[120px] bg-gray-100 py-16 md:py-24 overflow-hidden">
+    <section
+  id="philosophy"
+  className="min-h-screen flex items-center bg-gray-100 py-16 md:py-24 overflow-hidden px-[30px] md:px-[120px]"
+>
+
       <div className="flex flex-col md:flex-row items-center justify-between gap-12 md:gap-24">
         {/* ✅ Left: Image with zoom-in */}
         <motion.div
@@ -86,7 +90,7 @@ const Philosophy = () => {
           </motion.h2>
 
           <motion.p
-            className="text-gray-600 mb-8 leading-relaxed"
+            className="text-black-600 mb-8 leading-relaxed"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
@@ -105,7 +109,7 @@ const Philosophy = () => {
 
           <motion.a
             href="about"
-            className="text-blue-600 font-semibold flex items-center gap-2 hover:gap-4 transition-all duration-300 cursor-pointer"
+            className="text-[#000099] font-semibold flex items-center gap-2 hover:gap-4 transition-all duration-300 cursor-pointer"
             
           >
             Know more about us

@@ -35,8 +35,8 @@ const Services = () => {
 
   return (
     <section
-      id="services"
-      className="relative flex flex-col items-center gap-10 px-4 sm:px-12 lg:px-24 xl:px-40 pt-20 pb-24 text-gray-700 dark:text-white overflow-hidden"
+      id="service"
+  className="relative flex flex-col justify-center items-center gap-10 px-4 sm:px-12 lg:px-24 xl:px-40 text-gray-700 dark:text-white overflow-hidden scroll-mt-24 mb-20"
     >
       {/* Floating Background Image */}
       <motion.img
@@ -69,7 +69,7 @@ const Services = () => {
       </motion.div>
 
       {/* Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6 w-full max-w-5xl">
         {servicesData.map((service, index) => (
           <motion.div
             key={index}
@@ -83,7 +83,7 @@ const Services = () => {
               ease: "easeOut",
             }}
           >
-            <ServiceCard service={service} index={index} />
+            <ServiceCard key={index} service={service} index={index} />
           </motion.div>
         ))}
       </div>

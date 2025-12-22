@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { assets } from "../assets/assets";
 import bg from "../assets/bg.jpg";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const fadeUpItem = {
@@ -39,16 +40,15 @@ const Footer = () => {
               viewport={{ once: true }}
               className="flex flex-col justify-center space-y-2"
             >
-             <h2 className="text-xl md:text-3xl font-semibold tracking-wide text-white">
-  Our Office
-</h2>
-<div className="w-37 h-[2px] bg-white/80 mb-3"></div>
+              <h2 className="text-xl md:text-3xl font-semibold tracking-wide text-white">
+                Our Office
+              </h2>
+              <div className="w-37 h-[2px] bg-white/80 mb-3"></div>
 
-<p className="text-gray-100 text-[20px] md:text-base leading-relaxed max-w-md">
-  Visit AMC & Associates — where professionalism, precision, and trust come
-  together in every engagement.
-</p>
-
+              <p className="text-gray-100 text-[20px] md:text-base leading-relaxed max-w-md">
+                Visit AMC & Associates — where professionalism, precision, and
+                trust come together in every engagement.
+              </p>
             </motion.div>
 
             {/* Right Side - Google Map */}
@@ -94,9 +94,7 @@ const Footer = () => {
                 className="mb-4 w-36 h-auto brightness-90 hover:brightness-110 transition-all duration-300"
               />
               <p className="text-[#0F0E0E] font-semibold text-sm leading-relaxed">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
-                asperiores, suscipit error perferendis repellat id alias ipsa
-                commodi?
+                Professional accounting, taxation, and business support services for organizations of all sizes.
               </p>
             </motion.div>
 
@@ -118,13 +116,18 @@ const Footer = () => {
                   Quick Links
                 </h4>
                 <ul className="space-y-2 text-sm text-[#0F0E0E] font-semibold">
-                  {["Home", "Services", "About", "Contact"].map((link, i) => (
+                  {[
+                    { name: "Home", href: "#home" },
+                    { name: "Services", href: "#services" },
+                    { name: "Philosophy", href: "#philosophy" },
+                    { name: "Services", href: "#services" },
+                  ].map(({ name, href }, i) => (
                     <motion.li key={i} variants={fadeUpItem}>
                       <a
-                        href="#"
+                        href={href}
                         className="hover:text-[#880000] hover:translate-x-1 inline-block transition-all duration-300"
                       >
-                        {link}
+                        {name}
                       </a>
                     </motion.li>
                   ))}
@@ -133,36 +136,38 @@ const Footer = () => {
 
               {/* Social Media */}
               <motion.div variants={fadeUpItem}>
-                <h4 className="text-[#880000] font-bold mb-3 uppercase tracking-wide">
-                  Social Media
-                </h4>
-                <ul className="space-y-2 text-sm text-[#0F0E0E] font-semibold">
-                  {[
-                    { icon: assets.facebook, label: "Facebook" },
-                    { icon: assets.twitter, label: "Twitter" },
-                    { icon: assets.instagram, label: "Instagram" },
-                    { icon: assets.linkedin, label: "LinkedIn" },
-                  ].map(({ icon, label }, idx) => (
-                    <motion.li
-                      key={idx}
-                      variants={fadeUpItem}
-                      className="flex items-center gap-2 hover:translate-x-1 transition-all duration-300 cursor-pointer"
-                    >
-                      <img
-                        src={icon}
-                        alt={label}
-                        className="w-6 h-6 hover:scale-110 transition-transform duration-200"
-                      />
-                      <a
-                        href="#"
-                        className="hover:text-[#880000] transition-colors duration-200"
-                      >
-                        {label}
-                      </a>
-                    </motion.li>
-                  ))}
-                </ul>
-              </motion.div>
+  <h4 className="text-[#880000] font-bold mb-3 uppercase tracking-wide">
+    Social Media
+  </h4>
+  <ul className="space-y-2 text-sm text-[#0F0E0E] font-semibold">
+    {[
+      { icon: assets.facebook, label: "Facebook", url: "https://www.facebook.com/amcassoc/" },
+      { icon: assets.twitter, label: "Twitter", url: "https://x.com/AMC_CPAs" },
+      { icon: assets.instagram, label: "Instagram", url: "https://www.instagram.com/amcassociates/" },
+      { icon: assets.tiktok, label: "TikTok", url: "https://www.tiktok.com/@amcassociates" },
+    ].map(({ icon, label, url }, idx) => (
+      <motion.li
+        key={idx}
+        variants={fadeUpItem}
+        className="flex items-center gap-2 hover:translate-x-1 transition-all duration-300 cursor-pointer"
+      >
+        <img
+          src={icon}
+          alt={label}
+          className="w-6 h-6 hover:scale-110 transition-transform duration-200"
+        />
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-[#880000] transition-colors duration-200"
+        >
+          {label}
+        </a>
+      </motion.li>
+    ))}
+  </ul>
+</motion.div>
 
               {/* Legal */}
               <motion.div variants={fadeUpItem}>
@@ -190,9 +195,7 @@ const Footer = () => {
           {/* Bottom Bar */}
           <div className="text-[#0F0E0E] font-medium border-t border-gray-300/80 text-center py-4 text-sm bg-[#ececec]">
             © 2025{" "}
-            <span className="text-[#880000] font-semibold">
-              AMC & ASSOCIATES
-            </span>
+            <span className="text-[#000099] font-semibold">AMC</span><span className="text-[#880000] font-semibold">  & ASSOCIATES</span>
             . All rights reserved.
           </div>
         </motion.div>

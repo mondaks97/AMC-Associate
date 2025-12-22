@@ -14,6 +14,7 @@ import bgtry from './bgtry.jpg'
 import bg_about from './bg_about.jpg'
 import aboutbg from './aboutbg.jpg'
 import facebook from './facebook.png'
+import tiktok from './tiktok.png'
 import instagram from './instagram.png'
 import twitter from './twitter.png'
 import linkedin from './linkedin.png'
@@ -29,8 +30,9 @@ import AMC_Associates from './AMC_Associates.jpg'
 import amc_banner from './amc_banner.jpg'
 import reviewandadvisory from './reviewandadvisory.png'
 import mission from './mission.jpg'
-import biricons from "./biricons.png"
-import bsplogonew from "./bsplogonew.png"
+import bir from "./bir.png"
+import bsplogonew from "./bsplogonew.jpg"
+import BOA from './BOA.jpg'
 import CDAlogo from "./CDAlogo.png"
 import IClogo from "./IClogo.png"
 import SEClogo from "./SEClogo.png"
@@ -47,6 +49,9 @@ import woocommerce from './woocommerce.png'
 import meundies from './meundies.png'
 import blog1 from './blog1.jpg'
 import blogimg from './blogimg.jpg'
+import amc_wallpaper2 from './amc_wallpaper2.jpg'
+
+
 
 
 
@@ -75,6 +80,7 @@ export const assets = {
   aboutbg,
   facebook,
   twitter,
+  tiktok,
   instagram,
   linkedin,
   dashboard_home,
@@ -89,8 +95,9 @@ export const assets = {
   AMC_Associates,
   amc_banner,
   reviewandadvisory,
-  biricons,
+  bir,
   bsplogonew,
+  BOA,
   IClogo,
   CDAlogo,
   SEClogo,
@@ -106,7 +113,8 @@ export const assets = {
   woocommerce,
   slack,
   blog1,
-  blogimg
+  blogimg,
+  amc_wallpaper2
 
   
 
