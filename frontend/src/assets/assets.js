@@ -50,13 +50,19 @@ import meundies from './meundies.png'
 import blog1 from './blog1.jpg'
 import blogimg from './blogimg.jpg'
 import amc_wallpaper2 from './amc_wallpaper2.jpg'
-
-
-
-
-
-
-
+import one from './one.webp'
+import two from './two.webp'
+import three from './three.webp'
+import four from './four.webp'
+import amc_logo2 from './amc_logo2.png'
+import contact_us from './contact_us.jpg'
+import services from './services.jpg'
+import about_us from './about_us.jpg'
+import user_icon from './user_icon.svg'
+import comment_icon from './comment_icon.png'
+import tick_icon from './tick_icon.svg'
+import bin_icon from './bin_icon.svg'
+import comment from './comment.png'
 
 
 
@@ -114,7 +120,20 @@ export const assets = {
   slack,
   blog1,
   blogimg,
-  amc_wallpaper2
+  amc_wallpaper2,
+  one,
+  two,
+  three,
+  four,
+  amc_logo2,
+  contact_us,
+  about_us,
+  services,
+  user_icon,
+  comment_icon,
+  tick_icon,
+  bin_icon,
+  comment,
 
   
 
@@ -123,7 +142,7 @@ export const assets = {
 
 }
 
-export const blogCategories = ['All', 'Technology', 'Startup', 'Lifestyle', 'Finance']
+export const blogCategories = ['All', 'AMC Care', 'Sportfest', 'Year End Party', 'Team Building']
 
 export const blog_data = [
     {
@@ -247,6 +266,59 @@ export const blog_data = [
         "subTitle": "Navigating the Future Responsibly"
     }
 ]
+
+export const comments_data = [
+        {
+            "_id": "6811ed9e7836a82ba747cb25",
+            "blog": blog_data[0],
+            "name": "Michael Scott",
+            "content": "This is my new comment",
+            "isApproved": false,
+            "createdAt": "2025-04-30T09:30:06.918Z",
+            "updatedAt": "2025-04-30T09:30:06.918Z",
+            "__v": 0
+        },
+        {
+            "_id": "6810a752fbb942aa7cbf4adb",
+            "blog": blog_data[1],
+            "name": "John Doe",
+            "content": "This is a nice blog",
+            "isApproved": false,
+            "createdAt": "2025-04-29T10:17:54.832Z",
+            "updatedAt": "2025-04-29T10:17:54.832Z",
+            "__v": 0
+        },
+        {
+            "_id": "680779aebef75c08f8b4898f",
+            "blog": blog_data[2],
+            "name": "Jack London",
+            "content": "Hi this blog is must to read",
+            "isApproved": true,
+            "createdAt": "2025-04-22T11:12:46.547Z",
+            "updatedAt": "2025-04-22T11:13:10.015Z",
+            "__v": 0
+        },
+        {
+            "_id": "680770aeb2897e5c28bf9b26",
+            "blog": blog_data[3],
+            "name": "Sam Smith",
+            "content": "This is the best blog, everybody should read it",
+            "isApproved": false,
+            "createdAt": "2025-04-22T10:34:22.020Z",
+            "updatedAt": "2025-04-22T10:34:22.020Z",
+            "__v": 0
+        },
+        {
+            "_id": "68076468e32055c94a696cf5",
+            "blog": blog_data[4],
+            "name": "Peter Lawrence",
+            "content": "Honestly, I did not expect this to work, but it totally did. Saved my project!",
+            "isApproved": true,
+            "createdAt": "2025-04-22T09:42:00.444Z",
+            "updatedAt": "2025-04-22T10:24:55.626Z",
+            "__v": 0
+        }
+    ]
 
 export const dashboard_data = {
     "blogs": 10,

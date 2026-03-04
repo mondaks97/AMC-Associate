@@ -1,9 +1,9 @@
-import AboutUs from "../components/AboutUs";
+// import AboutUs from "../components/AboutUs";
 import Banner from "../components/Banner";
-import Blog from "../components/Blog";
+// import Blog from "../components/Blog";
 import ClientLogos from "../components/ClientLogos";
-import ContactUs from "../components/ContactUs";
-import Footer from "../components/Footer";
+// import ContactUs from "../components/ContactUs";
+// import Footer from "../components/Footer";
 import Hero from "../components/Hero";
 import Navbar from "../components/Navbar";
 import Philosophy from "../components/Philosophy";

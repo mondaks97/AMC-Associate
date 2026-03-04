@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import Preloader from "./components/Preloader.jsx";
 import PublicLayout from "./components/PublicLayout.jsx"; // Adjust path
 import ScrollToTop from "./components/ScrollToTop.js";
 
@@ -18,9 +19,16 @@ import Login from "./components/admin/Login.jsx";
 import 'quill/dist/quill.snow.css';
 import SmoothScroll from "./components/SmoothScroll.jsx";
 import { useEffect, useRef } from "react";
+import Blog from "./components/Blog.jsx";
+import {Toaster} from 'react-hot-toast'
+import { useAppContext } from "./context/AppContext.jsx";
+import Comments from "./Pages/admin/Comments.jsx";
+
 
 
 const App = () => {
+
+  const {token} = useAppContext()
 
   const dotRef = useRef(null)
   const outlineRef = useRef(null)
@@ -51,44 +59,93 @@ const App = () => {
 
       animate()
 
+      
+
       return ()=>{
         document.removeEventListener('mousemove', handleMouseMove)
       }
     },[])
 
-  return (
-    <div> 
-       <ScrollToTop />  
-      <SmoothScroll /> {/* This enables the inertia scroll */}
-      <Routes>
-        {/* Public Routes with Navbar & Footer */}
-        <Route element={<PublicLayout />}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/services" element={<ServicesPage />} />
-          <Route path="/partners" element={<PartnersPage />} />
-          <Route path="/apply" element={<ApplyPage />} />
-          <Route path="/blogs" element={<BlogPage />} />
-          <Route path="/contact" element={<ContactPage />} />
+  // return (
+  //   <div> 
+  //     <ScrollToTop />  
+  //     <SmoothScroll /> {/* This enables the inertia scroll */}
+  //     <Routes>
+  //       {/* Public Routes with Navbar & Footer */}
+  //       <Route element={<PublicLayout />}>
+  //         <Route path="/" element={<HomePage />} />
+  //         <Route path="/home" element={<HomePage />} />
+  //         <Route path="/about" element={<AboutPage />} />
+  //         <Route path="/services" element={<ServicesPage />} />
+  //         <Route path="/partners" element={<PartnersPage />} />
+  //         <Route path="/apply" element={<ApplyPage />} />
+  //         <Route path="/blogs" element={<BlogPage />} />
+  //         <Route path="/contact" element={<ContactPage />} />
           
-        </Route>
+  //       </Route>
 
-        {/* Admin Routes */}
-        <Route path="/admin" element={true ? <Layout /> : <Login/>}>
-          <Route index element={<Dashboard />} />
-          <Route path="addBlog" element={<AddBlog />} />
-          <Route path="listBlog" element={<ListBlog />} />
-        </Route>
-      </Routes>
+  //       {/* Admin Routes */}
+  //       <Route path="/admin" element={true ? <Layout /> : <Login/>}>
+  //         <Route index element={<Dashboard />} />
+  //         <Route path="addBlog" element={<AddBlog />} />
+  //         <Route path="listBlog" element={<ListBlog />} />
+  //       </Route>
+  //     </Routes>
 
-          {/* Cursor Ring */}
-      <div ref={outlineRef} className="fixed top-0 left-0 h-10 w-10 rounded-full border border-blue-400 pointer-events-none z-[9999]" style={{transition:'transform 0.1s ease-out'}} ></div>
-          {/* Cursor Dot */}
-      <div ref={dotRef} className="fixed top-0 left-0 h-3 w-3 rounded-full bg-blue-500 pointer-events-none z-[9999]" ></div>
+  //         {/* Cursor Ring */}
+  //     <div ref={outlineRef} className="fixed top-0 left-0 h-10 w-10 rounded-full border border-blue-400 pointer-events-none z-[9999]" style={{transition:'transform 0.1s ease-out'}} ></div>
+  //         {/* Cursor Dot */}
+  //     <div ref={dotRef} className="fixed top-0 left-0 h-3 w-3 rounded-full bg-blue-500 pointer-events-none z-[9999]" ></div>
 
-    </div>
-  );
+  //   </div>
+  // );
+  
+
+  return (
+  <div>
+    {/* ✅ FIRST LOAD PRELOADER */}
+    <Preloader />
+
+    <ScrollToTop />
+    <SmoothScroll />
+    <Toaster/>
+    <Routes>
+      {/* Public Routes with Navbar & Footer */}
+      <Route element={<PublicLayout />}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/services" element={<ServicesPage />} />
+        <Route path="/partners" element={<PartnersPage />} />
+        <Route path="/apply" element={<ApplyPage />} />
+        <Route path="/blogs" element={<BlogPage />} />
+        <Route path="/blog/:id" element={<Blog/>} />
+        <Route path="/contact" element={<ContactPage />} />
+      </Route>
+
+      {/* Admin Routes */}
+      <Route path="/admin" element={token ? <Layout /> : <Login />}>
+        <Route index element={<Dashboard />} />
+        <Route path="addBlog" element={<AddBlog />} />
+        <Route path="listBlog" element={<ListBlog />} />
+        <Route path="Comments" element={<Comments />} />
+      </Route>
+    </Routes>
+
+    {/* Cursor Ring */}
+    <div
+      ref={outlineRef}
+      className="fixed top-0 left-0 h-10 w-10 rounded-full border border-blue-400 pointer-events-none z-[9999]"
+      style={{ transition: "transform 0.1s ease-out" }}
+    ></div>
+
+    {/* Cursor Dot */}
+    <div
+      ref={dotRef}
+      className="fixed top-0 left-0 h-3 w-3 rounded-full bg-blue-500 pointer-events-none z-[9999]"
+    ></div>
+  </div>
+);
 }
 
 export default App;

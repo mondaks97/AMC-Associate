@@ -1,152 +1,163 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
-import { assets } from "../assets/assets";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { assets, blog_data, comments_data } from "../assets/assets";
+import Navbar from "../components/Navbar.jsx";
+import Moment from "moment";
+
+import toast from "react-hot-toast";
+import { useAppContext } from "../context/AppContext.jsx";
+
 
 const Blog = () => {
-  const tags = [
-    { id: 1, name: "All" },
-    { id: 2, name: "Business" },
-    { id: 3, name: "Finance" },
-    { id: 4, name: "Technology" },
-    { id: 5, name: "Lifestyle" },
-    { id: 6, name: "Health" },
-  ];
+  const { id } = useParams();
 
-  const [activeLink, setActiveLink] = useState(0);
+  const {axios} = useAppContext()
 
-  // Container: handles stagger timing
-  const containerVariant = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.1,
-      },
-    },
-    exit: { opacity: 0, transition: { duration: 0.3 } },
+  const [data, setData] = useState(null);
+  const [comments, setComments] = useState([]);
+  const [name, setName] = useState("");
+  const [content, setContent] = useState("");
+
+  const fetchBlogData = async () => {
+    const data = blog_data.find((item) => item._id === id);
+    setData(data);
+    try {
+      const {data} = await axios.get(`/api/blog/${id}`)
+      data.success ? setData(data.blog) : toast.error(data.message)
+    } catch (error) {
+      toast.error(error.message)
+    }
   };
 
-  // Generic fade+slide for blog items
-  const itemVariant = {
-    hidden: { opacity: 0, y: 25 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
+  const fetchComments = async () => {
+     setComments(comments_data);
+    try {
+      const {data} = await axios.post('/api/blog/comments', {blogId: id})
+      if (data.success) {
+        setComments(data.comments)
+      } else {
+        toast.error(data.message)
+      }
+    } catch (error) {
+      toast.error(error.message)
+    }
   };
 
-  // Zoom-in for main image
-  const zoomVariant = {
-    hidden: { opacity: 0, scale: 0.95 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
-    },
+  const addComment = async (e) => {
+    e.preventDefault();
+    try {
+      const {data} = await axios.post('/api/blog/add-comment', {blog: id, name, content});
+      if (data.success) {
+        toast.success(data.message)
+        setName('')
+        setContent('')
+        fetchComments(); // ✅ refresh comments after adding
+      }else{
+          toast.error(data.message)
+        }
+      
+      } catch (error) {
+        toast.error(error.message)
+    }
   };
 
-  return (
-    <div className="w-full">
-      {/* ✅ Category Nav */}
-      <div className="flex flex-col justify-center px-[70px] md:px-[150px] mt-10 mb-8">
-        <div className="flex flex-wrap gap-3 md:gap-10 justify-center">
-          {tags.map((item, index) => (
-            <button
-              key={item.id}
-              onClick={() => setActiveLink(index)}
-              className={`
-                px-4 py-2 rounded-full font-medium text-sm md:text-base
-                border border-red-500 cursor-pointer
-                transition-all duration-300 ease-in-out transform
-                ${
-                  index === activeLink
-                    ? "bg-red-500 text-white scale-105 shadow-md"
-                    : "text-red-500 hover:bg-red-100 hover:scale-105"
-                }
-              `}
-            >
-              {item.name}
-            </button>
-          ))}
+  useEffect(() => {
+    fetchBlogData();
+    fetchComments();
+  }, []);
+
+  return data ? (
+    <div className="min-h-screen relative pt-20 md:pt-24">
+      {/* Optional Background */}
+      {/* <img className='absolute -top-50 -z-1 opacity-50' src="" alt="" /> */}
+
+      <Navbar />
+      {/* Header Section */}
+      <div className="text-center mt-20 text-gray-600">
+        <p className="text-[#000099] py-4 font-medium">
+          Published on {Moment(data.createdAt).format("MMMM Do YYYY")}
+        </p>
+        <h1 className="text-2xl sm:text-5xl font-semibold max-w-2xl mx-auto text-gray-800">
+          {data.title}
+        </h1>
+        <h2 className="my-5 max-w-lg truncate mx-auto">{data.subTitle}</h2>
+        <p className="inline-block py-1 px-4 rounded-full mb-6 border text-sm border-[#0e0e0e] bg-[#fff] font-medium text-[#000099]">
+          Mang Inasal
+        </p>
+      </div>
+      {/* Description  */}
+      <div className="mx-5 max-w-5xl md:mx-auto my-10 mt-6">
+        <img className="rounded-3xl mb-5" src={data.image} alt="" />
+        <div
+          className="rich-text max-w-3xl mx-auto"
+          dangerouslySetInnerHTML={{ __html: data.description }}
+        ></div>
+
+        {/* Comment Section */}
+        <div className="mt-14 mb-10 max-w-3xl mx-auto">
+          <p>Comments ({comments.length})</p>
+          <div className="flex flex-col gap-4">
+            {comments.map((item, index) => (
+              <div
+                className="relative bg-[#fff] border border-[#054435]/5 max-w-xl p-4 rounded text-gray-600"
+                key={index}
+              >
+                <div>
+                  <img className="w-6" src={assets.user_icon} alt="" />
+                  <p className="font-medium">{item.name}</p>
+                </div>
+                <p className="text-sm max-w-md ml-8">{item.content}</p>
+                <div className="absolute right-4 bottom-3 flex items-center gap-2 text-xs">
+                  {Moment(item.createdAt).fromNow()}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Add Comment Section */}
+        <div className="max-w-3xl mx-auto">
+          <p className="font-semibold mb-4">Add your comment</p>
+          <form
+            className="flex flex-col items-start gap-4 max-w-lg"
+            onSubmit={addComment}
+          >
+            <input
+              className="w-full p-2 border border-gray-300 rounded outline-none"
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+              type="text"
+              placeholder="Name"
+              required
+            />
+            <textarea
+              className="w-full p-2 border border-gray-300 rounded outline-none h-48"
+              onChange={(e) => setContent(e.target.value)}
+              value={content}
+              placeholder="Comment"
+              required
+            ></textarea>
+
+            <button className="bg-[#000099] text-white rounded p-2 px-8 hover:scale-102 transition-all cursor-pointer"type="submit">Submit</button>
+          </form>
+        </div>
+        
+        {/* Share Section */}
+        <div className="my-24 max-w-3xl mx-auto">
+          <p className="font-semibold my-4">Share this Blog on Social Media</p>
+          <div className="flex gap-4 items-center">
+            <img src={assets.facebook} alt="facebook" className="w-8 h-8 hover:scale-110 transition duration-200 cursor-pointer" />
+            <img src={assets.twitter} alt="twitter" className="w-8 h-8 hover:scale-110 transition duration-200 cursor-pointer" />
+            <img src={assets.tiktok} alt="tiktok" className="w-8 h-8 hover:scale-110 transition duration-200 cursor-pointer" />
+            <img src={assets.instagram} alt="instagram" className="w-8 h-8 hover:scale-110 transition duration-200 cursor-pointer" />
+          </div>
         </div>
       </div>
-
-      {/* ✅ Blog Section with Stagger + Zoom */}
-      <div className="px-[70px] md:px-[150px] min-h-[60vh]">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeLink}
-            variants={containerVariant}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            className="flex flex-col lg:flex-row gap-10 md:gap-16"
-          >
-            {/* Left (main blog) */}
-            <motion.div
-              variants={itemVariant}
-              className="w-full lg:w-1/2 flex flex-col gap-4"
-            >
-              <motion.img
-                variants={zoomVariant}
-                className="rounded-3xl object-cover w-full h-80 shadow-md"
-                src={assets.blogimg}
-                alt="Main blog"
-              />
-              <div className="flex items-center gap-4">
-                <h1 className="font-semibold lg:text-lg">01.</h1>
-                <Link className="text-blue-800 lg:text-lg">Sample Blog</Link>
-                <span className="text-gray-500 text-sm">2 days ago</span>
-              </div>
-              <Link
-                className="text-xl lg:text-2xl font-semibold lg:font-bold leading-snug"
-                to="/test"
-              >
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo,
-                minus!
-              </Link>
-            </motion.div>
-
-            {/* Right (other blogs) */}
-            <div className="w-full lg:w-1/2 flex flex-col gap-6">
-              {[2, 3, 4].map((num) => (
-                <motion.div
-                  key={num}
-                  variants={itemVariant}
-                  className="flex justify-between gap-4 items-start hover:scale-[1.02] transition-transform duration-300"
-                >
-                  <img
-                    className="rounded-3xl object-cover w-52 h-28 md:w-60 md:h-36"
-                    src={assets.blogimg}
-                    alt={`Blog ${num}`}
-                  />
-                  <div className="w-2/3">
-                    <div className="flex items-center gap-3 text-sm lg:text-base mb-3">
-                      <h1 className="font-semibold lg:text-lg">
-                        {String(num).padStart(2, "0")}.
-                      </h1>
-                      <Link className="text-blue-800 lg:text-lg">
-                        Sample Blog
-                      </Link>
-                      <span className="text-gray-500 text-sm">2 days ago</span>
-                    </div>
-                    <Link
-                      className="text-base sm:text-lg md:text-xl font-medium leading-snug"
-                      to="/test"
-                    >
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Repellendus, deserunt!
-                    </Link>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </AnimatePresence>
-      </div>
+      
+    </div>
+  ) : (
+    <div className="min-h-screen flex items-center justify-center">
+      Loading...
     </div>
   );
 };

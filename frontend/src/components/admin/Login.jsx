@@ -1,12 +1,35 @@
+
 import React, { useState } from 'react'
 
+import toast from 'react-hot-toast'
+import { useAppContext } from '../../context/AppContext'
+
 const Login = () => {
+
+  const {axios, setToken} = useAppContext()
+  const {token} = useAppContext()
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+
   const handleSubmit = async (e) => {
     e.preventDefault()
+    try { 
+      const {data} = await axios.post('/api/admin/login', {email,password})
+
+      if(data.success) {
+        setToken(data.token)
+        localStorage.setItem('token', data.token)
+        axios.defaults.headers.common['Authorization'] = data.token
+        
+      }
+      else{
+        toast.error(data.message)
+      }
+    } catch (error) {
+        toast.error(error.message)
+    }
   }
 
   return (
@@ -16,11 +39,11 @@ const Login = () => {
           <div className='w-full py-6 text-center'>
             <h1 className='text-3xl font-bold'>
               <span className='text-[#000099]'>Admin </span>
-              Login
+              {token ? 'Dashboard' : 'Login'}
               </h1>
             <p className='font-light'>Enter Your Credential to access admin panel</p>
           </div>
-            <form className='mt-6 w-full sm:max-w-md text-gray-600' onClick={handleSubmit}>
+            <form className='mt-6 w-full sm:max-w-md text-gray-600' >
               <div className='flex flex-col'>
                 <label>Email</label>
                 <input onChange={e=> setEmail(e.target.value)} value={email} type="email" required placeholder='your email' className='border-b-2 border-gray-300 p-2 outline-none mb-6'/>
@@ -30,7 +53,7 @@ const Login = () => {
                 <label>Password</label>
                 <input onChange={e=> setPassword(e.target.value)} value={password} type="password" required placeholder='your password' className='border-b-2 border-gray-300 p-2 outline-none mb-6'/>
               </div>
-                <button className='w-full py-3 font-medium bg-[#000099] text-white rounded cursor-pointer hover:bg-[#000099]/90 transition all' type='submit'>Login</button>
+                <button onClick={handleSubmit} className='w-full py-3 font-medium bg-[#000099] text-white rounded cursor-pointer hover:bg-[#000099]/90 transition all' type='submit'>Login</button>
             </form>
         </div>
       </div>

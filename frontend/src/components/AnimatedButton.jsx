@@ -63,7 +63,7 @@ const AnimatedButton = ({ label = "Click Me", to = "/"  }) => {
       </span>
 
       {/* Expanding circle */}
-      <span
+      {/* <span
         className="absolute top-1/2 left-1/2 rounded-full"
         style={{
           width: hover ? 200 : 10,
@@ -76,7 +76,7 @@ const AnimatedButton = ({ label = "Click Me", to = "/"  }) => {
           willChange: "width, height, opacity",
           zIndex: 0,
         }}
-      ></span>
+      ></span> */}
 
       {/* Right arrow */}
       <svg
